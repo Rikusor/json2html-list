@@ -75,6 +75,7 @@ function JSON2HTMLList(json, options) {
     container = _options.formatContainer(container);
 
     function walk(obj, parentElm) {
+
         if(typeof(obj) === 'object' && obj !== null && obj.constructor === Object ) {
             var ul = document.createElement('ul');
             ul = _options.formatUl(ul);
@@ -116,7 +117,6 @@ function JSON2HTMLList(json, options) {
 
             var hasCount = 0;
             for(var i=0; i < obj.length; i++) {
-                
                 if(typeof(obj[i]) !== 'object' || obj[i] === null) {
                     var li = document.createElement('li');
                     li = _options.formatLi(li);
@@ -131,6 +131,8 @@ function JSON2HTMLList(json, options) {
                     hasCount++;
                 } else {
                     walk(obj[i], parentElm);
+                    var separator = document.createElement('br');
+                    parentElm.appendChild(separator)
                 }
             }
             parentElm.appendChild(ul);
